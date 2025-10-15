@@ -29,6 +29,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ThemeToggle } from './ThemeToggle';
 
 const Navbar = () => {
   const { user, profile, signOut, isAdmin, isHost } = useAuth();
@@ -136,6 +137,8 @@ const Navbar = () => {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Theme toggle */}
+            <ThemeToggle />
             <Button
               variant="outline"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 group"
@@ -327,6 +330,8 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile theme toggle */}
+            <ThemeToggle />
             {user && (
               <Button
                 variant="ghost"
