@@ -25,6 +25,7 @@ import {
   Train,
   Mail,
   Book,
+  Heart,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -238,6 +239,14 @@ const Navbar = () => {
                         >
                           <BookOpen className="h-4 w-4 mr-3" />
                           My Bookings
+                        </Link>
+                        <Link
+                          to="/wishlist"
+                          className="flex items-center px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground"
+                          onClick={() => setIsUserMenuOpen(false)}
+                        >
+                          <Heart className="h-4 w-4 mr-3" />
+                          My Wishlist
                         </Link>
                         <Link
                           to="/itinerary"

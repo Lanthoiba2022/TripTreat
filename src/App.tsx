@@ -39,6 +39,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import ErrorBoundary from './components/ErrorBoundary';
+import WishlistPage from './pages/WishlistPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -129,6 +130,14 @@ const App = () => {
                     element={
                       <ProtectedRoute requireAdmin={true}>
                         <AdminDashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/wishlist"
+                    element={
+                      <ProtectedRoute>
+                        <WishlistPage />
                       </ProtectedRoute>
                     }
                   />

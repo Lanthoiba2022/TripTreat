@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { allHomestays } from './homestays-data';
+import AddToWishlistButton from '../components/AddToWishlistButton';
 
 const HomestaysPage = () => {
   const [priceRange, setPriceRange] = useState([500, 2000]);
@@ -299,12 +300,15 @@ const HomestaysPage = () => {
                       )}
                     </div>
 
-                    <Button
-                      className="w-full bg-primary hover:bg-primary/90"
-                      asChild
-                    >
-                      <Link to={`/homestays/${homestay.id}`}>View Details</Link>
-                    </Button>
+                    <div className="flex space-x-2">
+                      <Button
+                        className="w-full bg-primary hover:bg-primary/90"
+                        asChild
+                      >
+                        <Link to={`/homestays/${homestay.id}`}>View Details</Link>
+                      </Button>
+                      <AddToWishlistButton itemId={homestay.id} itemType="homestay" />
+                    </div>
                   </div>
                 </div>
               ))}

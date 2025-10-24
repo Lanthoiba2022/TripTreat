@@ -19,6 +19,7 @@ import {
 import { Link } from 'react-router-dom';
 import ReservationDialog from '@/components/ReservationDialog';
 import ContactDialog from '@/components/ContactDialog';
+import AddToWishlistButton from '../components/AddToWishlistButton';
 
 const eateries = [
   {
@@ -385,13 +386,16 @@ const EateriesPage = () => {
                           >
                             <Phone size={14} className="mr-1" /> Contact
                           </Button>
-                          <Button
-                            className="bg-primary hover:bg-primary/90 transition-transform duration-300 hover:scale-[1.02]"
-                            size="sm"
-                            onClick={() => handleReservationClick(eatery)}
-                          >
-                            Reserve Table
-                          </Button>
+                          <div className="flex space-x-2">
+                            <Button
+                              className="bg-primary hover:bg-primary/90 transition-transform duration-300 hover:scale-[1.02]"
+                              size="sm"
+                              onClick={() => handleReservationClick(eatery)}
+                            >
+                              Reserve Table
+                            </Button>
+                            <AddToWishlistButton itemId={eatery.id.toString()} itemType="eatery" />
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
