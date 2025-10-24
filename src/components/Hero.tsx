@@ -120,7 +120,7 @@ const Hero = () => {
               />
             </div>
             <Button
-              className="bg-primary hover:bg-primary/90 text-white py-2 px-6"
+              className="bg-primary hover:bg-primary/90 text-white p-3 px-6 h-auto"
               type="submit"
             >
               <Search size={18} className="mr-2" /> Search
