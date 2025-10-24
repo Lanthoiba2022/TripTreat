@@ -23,6 +23,13 @@ const AuthPage = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('login');
 
+  // Check if a specific tab was requested from navigation
+  React.useEffect(() => {
+    if (location.state?.tab) {
+      setActiveTab(location.state.tab);
+    }
+  }, [location.state?.tab]);
+
   // Get the return URL from location state or default to home page
   const from = location.state?.from?.pathname || '/';
 

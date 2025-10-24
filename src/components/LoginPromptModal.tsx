@@ -28,11 +28,11 @@ const LoginPromptModal = ({
 
   const handleLogin = () => {
     // Store the current location to redirect back after login
-    navigate('/auth', { state: { from: window.location.pathname } });
+    navigate('/auth', { state: { from: window.location.pathname, tab: 'login' } });
   };
 
   const handleSignup = () => {
-    navigate('/auth', { state: { from: window.location.pathname } });
+    navigate('/auth', { state: { from: window.location.pathname, tab: 'signup' } });
   };
 
   return (
