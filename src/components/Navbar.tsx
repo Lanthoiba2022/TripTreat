@@ -57,6 +57,17 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const handleAuthNavigation = (tab: 'login' | 'signup') => {
+    // If we're already on the auth page, just update the state
+    if (window.location.pathname === '/auth') {
+      navigate('/auth', { state: { tab }, replace: true });
+    } else {
+      // If we're on a different page, navigate normally
+      navigate('/auth', { state: { tab } });
+    }
+    setIsUserMenuOpen(false);
+  };
+
   return (
     <nav className="bg-background/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-4">
@@ -302,21 +313,18 @@ const Navbar = () => {
                         </p>
                       </div>
                       <div className="py-1">
-                        <Link
-                          to="/auth"
-                          className="block px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground"
-                          onClick={() => setIsUserMenuOpen(false)}
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground"
+                          onClick={() => handleAuthNavigation('login')}
                         >
                           Sign in
-                        </Link>
-                        <Link
-                          to="/auth"
-                          state={{ tab: 'signup' }}
-                          className="block px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground"
-                          onClick={() => setIsUserMenuOpen(false)}
+                        </button>
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground"
+                          onClick={() => handleAuthNavigation('signup')}
                         >
                           Create account
-                        </Link>
+                        </button>
                       </div>
                     </>
                   )}
