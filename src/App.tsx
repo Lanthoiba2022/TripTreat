@@ -33,15 +33,13 @@ import Loader from './components/Loader';
 import { preloadImages, staticImages } from './utils/imagePreloader';
 import StorePage from './pages/StorePage';
 import TransportPage from './pages/TransportPage';
-
+import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
 import BookingsPage from './pages/BookingsPage';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import ErrorBoundary from './components/ErrorBoundary';
-
-import AuthPage from './pages/Auth';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -90,7 +88,6 @@ const App = () => {
                 <ScrollToTop />
                 <Routes>
                   <Route path="/" element={<Index />} />
-                 
                   <Route path="/become-host" element={<BecomeHostPage />} />
                   <Route path="/homestays" element={<HomestaysPage />} />
                   <Route
@@ -110,9 +107,7 @@ const App = () => {
                   <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                   <Route path="/terms" element={<TermsPage />} />
                   <Route path="/faq" element={<FAQPage />} />
-                  
-                  <Route path="/auth" element ={<AuthPage/>}/>
-                  
+                  <Route path="/auth" element={<AuthPage />} />
                   {/* Protected routes */}
                   <Route
                     path="/profile"
