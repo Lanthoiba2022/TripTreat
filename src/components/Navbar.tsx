@@ -7,34 +7,39 @@ import {
   User,
   Map,
   Home,
-  Coffee,
   Landmark,
   Utensils,
   Info,
   PhoneCall,
-  ChevronDown,
   MapPin,
   CalendarRange,
   Award,
   ShoppingBag,
   LogOut,
   UserCircle,
-  Settings,
   LayoutDashboard,
   BookOpen,
   Train,
   Mail,
   Book,
 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+
 
 const Navbar = () => {
   const { user, profile, signOut, isAdmin, isHost } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Helper function to check if a route is active
+  const isActiveRoute = (path: string) => {
+    return location.pathname === path;
+  };
 
   // Toggle user menu
   const toggleUserMenu = (e: React.MouseEvent) => {
@@ -82,82 +87,289 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Full labels (2xl and above) */}
+          <div className="hidden 2xl:flex items-center space-x-6">
             <Link
               to="/homestays"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/homestays')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
-              <Home
-                size={16}
-                className="transition-transform group-hover:rotate-12"
-              />
+              <Home size={16} className="transition-transform group-hover:rotate-12" />
               Homestays
             </Link>
             <Link
               to="/hotspots"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/hotspots')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <MapPin size={16} />
               Hotspots
             </Link>
             <Link
               to="/eateries"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/eateries')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <Utensils size={16} />
               Eateries
             </Link>
             <Link
               to="/experiences"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/experiences')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <Award size={16} />
               Experiences
             </Link>
             <Link
               to="/tours"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/tours')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <CalendarRange size={16} />
               Tours
             </Link>
             <Link
               to="/itinerary"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/itinerary')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <Map size={16} />
               Itinerary
             </Link>
             <Link
               to="/store"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/store')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <ShoppingBag size={16} />
               Store
             </Link>
             <Link
               to="/transport"
-              className="text-foreground hover:text-primary transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/transport')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
             >
               <Train size={16} />
               Transport
             </Link>
           </div>
 
+          {/* Large screen navigation - Icons with labels (xl to 2xl) */}
+          <div className="hidden xl:flex 2xl:hidden items-center space-x-4">
+            <Link
+              to="/homestays"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/homestays')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <Home size={16} />
+              Homestays
+            </Link>
+            <Link
+              to="/hotspots"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/hotspots')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <MapPin size={16} />
+              Hotspots
+            </Link>
+            <Link
+              to="/eateries"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/eateries')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <Utensils size={16} />
+              Eateries
+            </Link>
+            <Link
+              to="/experiences"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/experiences')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <Award size={16} />
+              Experiences
+            </Link>
+            <Link
+              to="/tours"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/tours')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <CalendarRange size={16} />
+              Tours
+            </Link>
+            <Link
+              to="/transport"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/transport')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <Train size={16} />
+              Transport
+            </Link>
+          </div>
+
+          {/* Medium screen navigation - Icons only with tooltips (lg to xl) */}
+          <div className="hidden lg:flex xl:hidden items-center space-x-2">
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/homestays"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/homestays')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <Home size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Homestays</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/hotspots"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/hotspots')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <MapPin size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Hotspots</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/eateries"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/eateries')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <Utensils size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Eateries</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/experiences"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/experiences')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <Award size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Experiences</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/tours"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/tours')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <CalendarRange size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Tours</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/transport"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/transport')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <Train size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Transport</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
           {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center ml-6 xl:ml-8 space-x-2 xl:space-x-4">
+            {/* Become a Host button - responsive text */}
             <Button
               variant="outline"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 group"
               asChild
             >
-              <Link to="/become-host" className="flex items-center gap-2">
+              <Link to="/become-host" className="flex items-center gap-1 xl:gap-2">
                 <Landmark
                   size={16}
                   className="transition-transform group-hover:rotate-12"
                 />
-                Become a Host
+                <span className="hidden xl:inline">Become a Host</span>
+                <span className="xl:hidden">Host</span>
               </Link>
             </Button>
 
@@ -334,7 +546,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="lg:hidden flex items-center space-x-2">
             {user && (
               <Button
                 variant="ghost"
@@ -364,7 +576,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <div
           className={cn(
-            'md:hidden mt-2 py-4 bg-background rounded-lg shadow-lg transform transition-all duration-300',
+            'lg:hidden mt-2 py-4 bg-background rounded-lg shadow-lg transform transition-all duration-300',
             isMenuOpen
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 -translate-y-4 pointer-events-none hidden'
@@ -373,7 +585,11 @@ const Navbar = () => {
           <div className="flex flex-col space-y-3 px-4">
             <Link
               to="/homestays"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/homestays')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Home size={16} />
@@ -381,7 +597,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/tours"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/tours')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <CalendarRange size={16} />
@@ -389,7 +609,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/experiences"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/experiences')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Award size={16} />
@@ -397,7 +621,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/eateries"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/eateries')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Utensils size={16} />
@@ -405,7 +633,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/hotspots"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/hotspots')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <MapPin size={16} />
@@ -413,7 +645,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/itinerary"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/itinerary')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Map size={16} />
@@ -421,7 +657,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/store"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/store')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <ShoppingBag size={16} />
@@ -429,7 +669,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/transport"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/transport')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Train size={16} />
@@ -437,7 +681,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/about"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/about')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Info size={16} />
@@ -445,7 +693,11 @@ const Navbar = () => {
             </Link>
             <Link
               to="/contact"
-              className="py-2 text-foreground hover:text-primary flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/contact')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-foreground hover:text-primary'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <PhoneCall size={16} />
@@ -454,7 +706,11 @@ const Navbar = () => {
             <hr className="border-t border-border" />
             <Link
               to="/become-host"
-              className="py-2 text-primary font-semibold flex items-center gap-2"
+              className={`py-2 flex items-center gap-2 ${
+                isActiveRoute('/become-host')
+                  ? 'text-primary font-semibold bg-primary/10 rounded-md px-2'
+                  : 'text-primary font-semibold'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               <Landmark size={16} />
