@@ -79,12 +79,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <span className="text-2xl font-bold text-primary group-hover:scale-105 transition-all duration-300">
-              Trip<span className="text-secondary">&</span>Treat
-            </span>
-            <span className="hidden md:inline-block text-xs text-muted-foreground ml-2 mt-2">
-              Manipur Delights
-            </span>
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold text-primary group-hover:scale-105 transition-all duration-300">
+                Trip<span className="text-secondary">&</span>Treat
+              </span>
+              <span className="text-xs text-muted-foreground -mt-1">
+                Manipur Delights
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation - Full labels (2xl and above) */}
@@ -237,6 +239,28 @@ const Navbar = () => {
               Tours
             </Link>
             <Link
+              to="/itinerary"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/itinerary')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <Map size={16} />
+              Itinerary
+            </Link>
+            <Link
+              to="/store"
+              className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
+                isActiveRoute('/store')
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              <ShoppingBag size={16} />
+              Store
+            </Link>
+            <Link
               to="/transport"
               className={`transition-colors flex items-center gap-1 hover:scale-105 transition-all duration-200 ${
                 isActiveRoute('/transport')
@@ -334,6 +358,40 @@ const Navbar = () => {
               </TooltipTrigger>
               <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
                 <p className="font-medium">Tours</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/itinerary"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/itinerary')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <Map size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Itinerary</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/store"
+                  className={`transition-colors flex items-center p-2 rounded-md hover:scale-105 transition-all duration-200 ${
+                    isActiveRoute('/store')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-accent/50'
+                  }`}
+                >
+                  <ShoppingBag size={16} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="z-50 bg-popover border border-border shadow-lg">
+                <p className="font-medium">Store</p>
               </TooltipContent>
             </Tooltip>
             <Tooltip delayDuration={300}>
