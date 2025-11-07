@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -45,9 +48,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -56,4 +61,26 @@
 .animate-gradient-flow {
   animation: gradient-flow 8s ease infinite;
   background-size: 300% 300%;
+}
+
+/* Ensure all focusable elements show a clear visible focus */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  /* Tailwind blue-500 for contrast */
+  outline-offset: 3px;
+  border-radius: 6px;
+  transition: outline 0.15s ease-in-out;
+}
+
+/* Prevent unwanted outlines when clicking with mouse */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Extra visibility for dark backgrounds */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[role='button']:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
 }
